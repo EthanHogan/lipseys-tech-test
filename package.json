@@ -4,9 +4,10 @@
   "description": "Technical take home test for Lipsey's",
   "main": "index.js",
   "scripts": {
-    "server": "npm run dev --prefix server",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "install-all": "npm install && npm --prefix ./client install && npm --prefix ./server install",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/EthanHogan/lipseys-tech-test/issues"
   },
-  "homepage": "https://github.com/EthanHogan/lipseys-tech-test#readme"
+  "homepage": "https://github.com/EthanHogan/lipseys-tech-test#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
 }
