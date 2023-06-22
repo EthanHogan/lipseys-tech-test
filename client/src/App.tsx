@@ -1,8 +1,19 @@
-import React from 'react';
+import { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+type testResponse = {message: string}
 function App() {
+
+  const testRequest = (): void => {
+    fetch('/api')
+      .then(res => res.json())
+      .then((data: testResponse): void => {console.log(data.message)});
+  }
+
+  useEffect(() => {
+    testRequest();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
