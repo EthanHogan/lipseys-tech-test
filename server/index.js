@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import express from "express";
 dotenv.config();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4001;
 
 const app = express();
 
