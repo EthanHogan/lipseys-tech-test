@@ -3,7 +3,6 @@ import { getAllEmails } from "../csvReader.js";
 const emailController = {};
 
 emailController.getAllEmails = async (req, res) => {
-    console.log("GET ALL EMAILS ROUTE HIT");
     const emails = await getAllEmails();
     res.json({emails});
 };
