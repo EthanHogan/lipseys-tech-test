@@ -7,6 +7,7 @@ function App() {
   return (
     <>
       <FindEmail />
+      <DuplicateEmails />
     </>
   );
 }
@@ -32,6 +33,15 @@ const FindEmail = () => {
     setEmail(e.target.value);
   };
 
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (!email) {
+      setEmailExists(undefined);
+      return;
+    }
+    doesEmailExist(email);
+  };
+
   let result;
   if (emailExists === undefined) {
     result = <div></div>;
@@ -40,6 +50,7 @@ const FindEmail = () => {
   } else {
     result = <h2>Sorry, that email does not exist.</h2>;
   }
+
   return (
     <Container>
       <Row>
@@ -47,29 +58,66 @@ const FindEmail = () => {
           <h1>Find Email</h1>
           <Form>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
                 onChange={handleChange}
-                placeholder="Check if an email exists"
+                placeholder="Enter email"
                 className="mb-2"
               />
               <Form.Text className="text-muted"></Form.Text>
-              <Button
-                variant="primary"
-                type="submit"
-                onClick={(e) => {
-                  e.preventDefault();
-                  doesEmailExist(email);
-                }}
-              >
-                Submit
+              <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Check
               </Button>
             </Form.Group>
           </Form>
         </Col>
       </Row>
       {result}
+    </Container>
+  );
+};
+
+type duplicateEmailsResponse = { emails: string[] };
+
+const DuplicateEmails = () => {
+  const [duplicateEmails, setDuplicateEmails] = useState<string[]>([]);
+  const getDuplicateEmails = async (): Promise<void> => {
+    fetch("/api/emails/duplicates")
+      .then((res) => res.json())
+      .then((data: duplicateEmailsResponse): void => {
+        setDuplicateEmails(data.emails);
+      });
+  };
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <h1>Want to see duplicate emails?</h1>
+          <Form>
+            <Button
+              type="button"
+              variant="primary"
+              onClick={(e) => {
+                getDuplicateEmails();
+              }}
+            >
+              View Duplicate Emails
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+      {duplicateEmails.length > 0 && (
+        <Row>
+          <Col>
+            <h2>Duplicate Emails</h2>
+            <ol>
+              {duplicateEmails.map((email) => (
+                <li>{email}</li>
+              ))}
+            </ol>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };
