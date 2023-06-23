@@ -19,6 +19,7 @@ const FindEmail = () => {
   const [emailExists, setEmailExists] = useState<boolean | undefined>(
     undefined
   );
+  const [validated, setValidated] = useState<boolean>(false);
 
   const doesEmailExist = async (email: string): Promise<void> => {
     fetch("/api/emails/exists?email=" + email)
@@ -33,12 +34,16 @@ const FindEmail = () => {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email) {
+
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
       setEmailExists(undefined);
       return;
     }
+    setValidated(true);
     doesEmailExist(email);
   };
 
@@ -46,9 +51,9 @@ const FindEmail = () => {
   if (emailExists === undefined) {
     result = <div></div>;
   } else if (emailExists) {
-    result = <h2>Yes! The email exists!</h2>;
+    result = <h2 className="text-success">Yes! The email exists!</h2>;
   } else {
-    result = <h2>Sorry, that email does not exist.</h2>;
+    result = <h2 className="text-danger">Sorry, that email does not exist.</h2>;
   }
 
   return (
@@ -56,16 +61,19 @@ const FindEmail = () => {
       <Row>
         <Col>
           <h1>Find Email</h1>
-          <Form>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Control
+                required
                 type="email"
                 onChange={handleChange}
                 placeholder="Enter email"
                 className="mb-2"
               />
-              <Form.Text className="text-muted"></Form.Text>
-              <Button variant="primary" type="submit" onClick={handleSubmit}>
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid email
+              </Form.Control.Feedback>
+              <Button variant="primary" type="submit">
                 Check
               </Button>
             </Form.Group>
@@ -92,7 +100,7 @@ const DuplicateEmails = () => {
     <Container>
       <Row>
         <Col>
-          <h1>Want to see duplicate emails?</h1>
+          <h1>View duplicate emails</h1>
           <Form>
             <Button
               type="button"
@@ -101,7 +109,7 @@ const DuplicateEmails = () => {
                 getDuplicateEmails();
               }}
             >
-              View Duplicate Emails
+              View
             </Button>
           </Form>
         </Col>
