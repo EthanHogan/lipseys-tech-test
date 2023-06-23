@@ -1,13 +1,26 @@
 import { useState } from "react";
 import "./App.css";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
+import "./custom.scss";
 
 function App() {
   return (
     <>
-      <FindEmail />
-      <DuplicateEmails />
+      <Container>
+        <Row>
+          <Col>
+            <h1>Technical Test</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={6}>
+            <FindEmail />
+          </Col>
+          <Col xs={12} md={6}>
+            <DuplicateEmails />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
@@ -57,10 +70,10 @@ const FindEmail = () => {
   }
 
   return (
-    <Container>
+    <>
       <Row>
         <Col>
-          <h1>Find Email</h1>
+          <h2>Find Email</h2>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Control
@@ -80,8 +93,10 @@ const FindEmail = () => {
           </Form>
         </Col>
       </Row>
-      {result}
-    </Container>
+      <Row>
+        <Col>{result}</Col>
+      </Row>
+    </>
   );
 };
 
@@ -100,9 +115,10 @@ const DuplicateEmails = () => {
     <Container>
       <Row>
         <Col>
-          <h1>View duplicate emails</h1>
+          <h2>View duplicate emails</h2>
           <Form>
             <Button
+              data-bs-theme="dark"
               type="button"
               variant="primary"
               onClick={(e) => {
