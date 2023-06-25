@@ -15,21 +15,18 @@ export const ToggleLightMode = () => {
   }, [lightMode]);
 
   return (
-    <div className="d-inline-block">
-      <Button title="toggleLightMode" onClick={toggleLightMode}>
-        <i
-          className={
-            (lightMode ? "text-secondary" : "text-light") +
-            " bi bi-sun-fill fs-3 me-3"
-          }
-        ></i>
-        <i
-          className={
-            (!lightMode ? "text-primary" : "text-dark") +
-            " bi bi-moon-fill fs-3"
-          }
-        ></i>
-      </Button>
-    </div>
+    <Button title="toggleLightMode" onClick={toggleLightMode}>
+      <i
+        className={
+          (lightMode ? "text-secondary" : "text-light") +
+          " bi bi-sun-fill fs-3 me-3"
+        }
+      ></i>
+      <i
+        className={
+          (!lightMode ? "text-primary" : "text-dark") + " bi bi-moon-fill fs-3"
+        }
+      ></i>
+    </Button>
   );
 };

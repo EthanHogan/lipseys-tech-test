@@ -25,9 +25,11 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
-            className=" justify-content-end"
+            className="justify-content-end"
           >
-            <ToggleLightMode />
+            <div className="d-flex justify-content-end">
+              <ToggleLightMode />
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
