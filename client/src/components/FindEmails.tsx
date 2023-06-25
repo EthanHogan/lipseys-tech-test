@@ -39,11 +39,19 @@ export const FindEmail = () => {
 
   let result;
   if (emailExists === undefined) {
-    result = <div></div>;
+    result = null;
   } else if (emailExists) {
-    result = <h2 className="text-success">Yes! The email exists!</h2>;
+    result = (
+      <h5>
+        <em className="text-primary">Yes! The email exists!</em>
+      </h5>
+    );
   } else {
-    result = <h2 className="text-danger">Sorry, that email does not exist.</h2>;
+    result = (
+      <h5>
+        <em className="text-danger">Sorry, that email does not exist.</em>
+      </h5>
+    );
   }
 
   return (
@@ -63,19 +71,26 @@ export const FindEmail = () => {
               <Form.Control.Feedback type="invalid">
                 Please provide a valid email
               </Form.Control.Feedback>
-              <Button
-                variant="primary"
-                type="submit"
-                title="checkIfEmailExists"
-              >
-                Check
-              </Button>
+              <Row className="mt-3">
+                <Col xs={12} sm={3}>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    title="checkIfEmailExists"
+                  >
+                    Check
+                  </Button>
+                </Col>
+                <Col xs={12} sm={9} className="mt-2 mt-sm-0">
+                  <div>{result}</div>
+                </Col>
+              </Row>
             </Form.Group>
           </Form>
         </Col>
       </Row>
       <Row>
-        <Col>{result}</Col>
+        <Col></Col>
       </Row>
     </>
   );

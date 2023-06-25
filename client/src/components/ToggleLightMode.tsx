@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 
 export const ToggleLightMode = () => {
-  const [lightMode, setLightMode] = useState<boolean>(false);
+  const [lightMode, setLightMode] = useState<boolean>(true);
 
   const toggleLightMode = () => {
     setLightMode(!lightMode);
