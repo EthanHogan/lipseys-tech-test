@@ -1,5 +1,83 @@
-// $theme-colors: (
-//   "primary": purple,
-// );
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "~bootstrap/scss/functions";
 
-@import "~bootstrap/scss/bootstrap.scss";
+// 2. Include any default variable overrides here
+// $primary: #3d0a91; //$indigo-700
+$primary: #a370f7; //$indigo-300
+$secondary: darken($primary, 35%);
+$body-bg: #e9ecef; //$gray-200
+$body-bg-dark: #290661; //$indigo-800
+
+$body-color: black;
+$body-color-dark: #e0cffc; //$indigo-100
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+$dark-primary: $secondary;
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+$button-border-color: $indigo-400;
+
+$button-border-hover-color: $indigo-200;
+
+$input-bg: $gray-400;
+$input-bg-dark: $indigo-900;
+
+@include color-mode(light) {
+  // CSS variable overrides here...
+  .form-control {
+    background-color: $input-bg;
+  }
+  .text-primary {
+    color: $dark-primary;
+  }
+}
+
+@include color-mode(dark) {
+  // CSS variable overrides here...
+  .form-control {
+    background-color: $input-bg-dark;
+  }
+  .btn-primary {
+    background-color: $dark-primary;
+    border-color: $button-border-color;
+    color: $white;
+  }
+  .btn-primary:hover {
+    background-color: $dark-primary;
+    border-color: $button-border-hover-color;
+    color: $white;
+  }
+  .btn-primary:focus-visible {
+    background-color: $dark-primary;
+    border-color: $button-border-hover-color;
+    color: $white;
+  }
+  //   .btn-primary:active {
+  //     background-color: $dark-primary;
+  //     border-color: $button-border-hover-color;
+  //     color: $white;
+  //   }
+}
+@import "~bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/helpers";
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "~bootstrap/scss/utilities/api";
+
+// 8. Add additional custom code here
+@import "~bootstrap/scss/bootstrap";
