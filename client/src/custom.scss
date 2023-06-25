@@ -2,7 +2,6 @@
 @import "~bootstrap/scss/functions";
 
 // 2. Include any default variable overrides here
-// $primary: #3d0a91; //$indigo-700
 $primary: #a370f7; //$indigo-300
 $secondary: darken($primary, 35%);
 $body-bg: #e9ecef; //$gray-200
@@ -59,11 +58,6 @@ $input-bg-dark: $indigo-900;
     border-color: $button-border-hover-color;
     color: $white;
   }
-  //   .btn-primary:active {
-  //     background-color: $dark-primary;
-  //     border-color: $button-border-hover-color;
-  //     color: $white;
-  //   }
 }
 @import "~bootstrap/scss/root";
 
