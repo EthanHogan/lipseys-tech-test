@@ -8,6 +8,7 @@ import {
   Form,
   Navbar,
   Image,
+  Table,
 } from "react-bootstrap";
 import "./custom.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -39,15 +40,10 @@ function App() {
       </Navbar>
       <Container>
         <Row>
-          <Col>
-            <h1>Technical Test</h1>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} lg={{ span: 5, offset: 1 }}>
+          <Col xs={12} lg={{ span: 5, offset: 1 }} className="mt-5">
             <FindEmail />
           </Col>
-          <Col xs={12} lg={{ span: 5 }}>
+          <Col xs={12} lg={{ span: 5 }} className="mt-5">
             <DuplicateEmails />
           </Col>
         </Row>
@@ -148,10 +144,39 @@ const DuplicateEmails = () => {
       });
   };
   return (
-    <Container>
+    <>
       <Row>
         <Col>
-          <h2>View duplicate emails</h2>
+          <h2>View Duplicates</h2>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Table>
+            <thead>
+              <tr>
+                <th>Emails</th>
+              </tr>
+            </thead>
+            <tbody>
+              {duplicateEmails.map((email) => (
+                <tr>
+                  <td>{email}</td>
+                </tr>
+              ))}
+              {duplicateEmails.length === 0 && (
+                <tr>
+                  <td>
+                    <i>Results hidden</i>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <Form>
             <Button
               title="viewDuplicateEmails"
@@ -166,19 +191,7 @@ const DuplicateEmails = () => {
           </Form>
         </Col>
       </Row>
-      {duplicateEmails.length > 0 && (
-        <Row>
-          <Col>
-            <h2>Duplicate Emails</h2>
-            <ol>
-              {duplicateEmails.map((email) => (
-                <li>{email}</li>
-              ))}
-            </ol>
-          </Col>
-        </Row>
-      )}
-    </Container>
+    </>
   );
 };
 
