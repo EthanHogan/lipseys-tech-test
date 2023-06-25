@@ -15,8 +15,8 @@ function App() {
           <Navbar.Brand href="#home">
             <Image
               src={navLogo}
-              height={100}
-              width={300}
+              height={75}
+              width={225}
               className="d-inline-block align-top"
               alt="Lipseys Logo"
               fluid
